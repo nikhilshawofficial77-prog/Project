@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#16a34a">
+  <title>CarePulse Clinic Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#feedback" aria-label="CarePulse Clinic Portal home">
+        <span class="brand-icon" aria-hidden="true">🩺</span>
+        <span><strong>CarePulse Clinic Portal</strong><small>Service Quality &amp; Feedback System</small></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <label class="sr-only" for="language">Language</label>
+        <select id="language" class="language-select" aria-label="Language">
+          <option>English</option><option>हिन्दी</option>
+        </select>
+        <button id="contrast-toggle" class="button button-outline" type="button" aria-pressed="false">◉&nbsp; High Contrast</button>
+        <span class="nav-divider" aria-hidden="true"></span>
+        <button class="nav-link active" data-page="feedback" type="button">Feedback</button>
+        <button class="nav-link" data-page="dashboard" type="button">Dashboard</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="feedback-page" class="page-shell">
+    <section class="feedback-card" aria-labelledby="feedback-heading">
+      <div class="form-heading">
+        <h1 id="feedback-heading">We Value Your Experience</h1>
+        <p>Please share your feedback to help us improve our clinic services.</p>
+      </div>
+      <form id="feedback-form">
+        <div class="anonymous-row">
+          <label for="anonymous">Submit Anonymously?</label>
+          <label class="switch" aria-label="Submit anonymously"><input id="anonymous" type="checkbox" checked><span class="slider"></span></label>
+        </div>
+        <div id="patient-field" class="field hidden">
+          <label for="patient-name">Your name <span class="optional">(optional)</span></label>
+          <input id="patient-name" name="patientName" type="text" maxlength="80" autocomplete="name" placeholder="Enter your name">
+        </div>
+        <div class="field">
+          <label for="visit-date">Visit Date</label>
+          <input id="visit-date" name="visitDate" type="date" required>
+        </div>
+        <div class="field">
+          <label for="category">Service Category</label>
+          <select id="category" name="category" required>
+            <option>Nursing &amp; Care</option><option>Reception &amp; Check-in</option><option>Doctor Consultation</option><option>Wait Time</option><option>Facilities &amp; Cleanliness</option><option>Billing &amp; Insurance</option><option>Other</option>
+          </select>
+        </div>
+        <fieldset class="rating-field">
+          <legend>Overall Satisfaction Rating (1 to 5 Stars)</legend>
+          <div class="rating-options">
+            <label><input type="radio" name="rating" value="1" required><span>1</span><span class="stars">★</span></label>
+            <label><input type="radio" name="rating" value="2"><span>2</span><span class="stars">★★</span></label>
+            <label><input type="radio" name="rating" value="3"><span>3</span><span class="stars">★★★</span></label>
+            <label><input type="radio" name="rating" value="4"><span>4</span><span class="stars">★★★★</span></label>
+            <label><input type="radio" name="rating" value="5"><span>5</span><span class="stars">★★★★★</span></label>
+          </div>
+        </fieldset>
+        <div class="field comments-field">
+          <label for="comments">Comments &amp; Suggestions</label>
+          <textarea id="comments" name="comments" rows="4" maxlength="1500" placeholder="Tell us about your experience…"></textarea>
+          <small class="storage-note">Your feedback is saved in this browser on this device.</small>
+        </div>
+        <button class="button button-primary submit-button" type="submit">Submit Feedback</button>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <main id="dashboard-page" class="page-shell dashboard-shell hidden">
+    <section class="stats-grid" aria-label="Feedback summary">
+      <article class="stat-card"><p>Total Feedback</p><strong id="total-count">0</strong></article>
+      <article class="stat-card"><p>Average Rating</p><strong id="average-rating" class="green">0.0 / 5</strong></article>
+      <article class="stat-card"><p>Pending Review</p><strong id="pending-count" class="orange">0</strong></article>
+      <article class="stat-card"><p>Resolved Issues</p><strong id="resolved-count" class="blue">0</strong></article>
+    </section>
+    <section class="report-card">
+      <div class="report-heading">
+        <div><h1>Service Quality Reports &amp; Moderation</h1><p>Analyze feedback entries, update response workflows, and moderate comments.</p></div>
+        <div class="report-controls">
+          <label class="sr-only" for="dashboard-filter">Filter by category</label>
+          <select id="dashboard-filter"><option value="all">All Categories</option></select>
+          <button id="export-button" class="button button-outline" type="button">Export Report</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Visit Date / Submitted</th><th>Patient</th><th>Category</th><th>Rating</th><th>Comments</th><th>Workflow Status</th><th>Actions</th></tr></thead>
+          <tbody id="feedback-rows"></tbody>
+        </table>
+        <p id="empty-state" class="empty-state">No feedback yet. Submitted feedback will appear here.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">Clinic Feedback &amp; Service Quality Portal © 2026 <span aria-hidden="true">|</span> Helpline: 1-800-555-CLINIC</footer>
+</body>
+</html>
